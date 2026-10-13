@@ -1,0 +1,16 @@
+# Normalize text and keep image, animation, and audio files as binary assets.
+* text=auto
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.cff text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.png binary
+*.gif binary
+*.jpg binary
+*.jpeg binary
+*.mp3 binary
+*.wav binary

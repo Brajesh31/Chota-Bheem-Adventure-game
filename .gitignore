@@ -1,0 +1,16 @@
+# Local environment files; this project currently reads no environment values.
+.env
+.env.*
+!.env.example
+
+# Common operating-system and editor state.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local build output if a build system is added later.
+/dist/
+/build/

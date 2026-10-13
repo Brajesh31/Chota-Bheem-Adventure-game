@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: >-
+  If you use or adapt the original game code, cite the repository and the
+  specific revision used. Verify separate permissions for artwork, animation,
+  audio, and other media before reuse.
+authors:
+  - family-names: Kumar
+    given-names: Brajesh
+type: software
+title: Chota Bheem Adventures
+repository-code: 'https://github.com/Brajesh31/Chota-Bheem-Adventure-game'
