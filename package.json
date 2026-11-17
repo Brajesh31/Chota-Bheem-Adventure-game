@@ -1,0 +1,12 @@
+{
+  "name": "chota-bheem-adventure-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static browser obstacle game with dependency-free Node.js checks",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "validate": "node scripts/validate-repository.mjs",
+    "check": "npm run validate && npm test"
+  }
+}
