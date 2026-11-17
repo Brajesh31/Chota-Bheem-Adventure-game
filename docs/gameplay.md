@@ -2,42 +2,52 @@
 
 ## Objective
 
-Control the character on the game screen and avoid the bull. The score increases when the bull passes the player without a detected collision.
+Avoid the moving bull for as long as possible. Each obstacle pass that clears the player without collision increases the score.
 
 ## Start a session
 
-1. Open `index.html` in a modern desktop browser.
-2. Select **Lets Run**.
-3. The start screen is hidden and the game screen is shown.
-4. Background music is requested by the browser after the user action.
+1. Open `index.html` in a current browser.
+2. Select **Let's Run**.
+3. Use keyboard controls or the on-screen buttons.
+4. Watch the score in the upper corner.
 
-## Controls currently implemented
+## Controls
 
-| Key | Current behavior | Notes |
-|---|---|---|
-| Arrow Up | Adds the jump animation class for a short period | The animation is CSS-driven |
-| Arrow Left | Moves the character 112 pixels left | No viewport boundary is enforced |
-| Arrow Right | Moves the character 112 pixels right | No viewport boundary is enforced |
+| Input | Action |
+|---|---|
+| Arrow Up | Jump |
+| Space | Jump |
+| Arrow Left | Move left |
+| Arrow Right | Move right |
+| On-screen Left | Move left |
+| On-screen Jump | Jump |
+| On-screen Right | Move right |
+| Pause | Pause the session |
+| Resume | Continue the paused session |
 
-The current source does not implement Space, WASD, touch, gamepad, pause, or a settings menu.
+The on-screen controls are available for touch devices as well as mouse users. The game does not currently support gamepads or custom key bindings.
 
-## Scoring and collision
+## Scoring and difficulty
 
-The script polls computed positions every 10 milliseconds. A collision is inferred when the horizontal offset is below 50 pixels and the vertical offset is below 40 pixels. A successful crossing increments the score once for the current pass, then re-arms scoring after a delay. The bull animation is made faster after a successful pass.
+A score point is awarded after the obstacle fully clears the player's horizontal hitbox. Each pass can be counted only once. Obstacle movement gradually speeds up as the score rises, but the animation duration has a lower bound so difficulty cannot accelerate indefinitely.
 
-These are implementation thresholds, not a formal physics model. They may behave differently across viewport sizes and frame rates.
+## Collision and game over
 
-## Game over
+The game uses inset rectangular hitboxes to limit false collision detections from transparent artwork margins. On collision, the active animation loop stops, background audio pauses, game-over audio is requested, and the final score is displayed.
 
-On collision, the game-over text changes, game-over audio is requested, the bull animation class is removed, and background audio is paused after a delay. The page does not currently expose a restart control. Reload the page to play again.
+## Pause and restart
 
-## Practical play notes
+- **Pause** suspends the animation loop and obstacle movement and pauses background music.
+- **Resume** continues the current session.
+- **Play Again** resets the score, position, audio and obstacle animation.
+- **Back to Start** stops the session and returns to the title screen.
 
-- Use a desktop keyboard.
-- Start the game with a user click so browser audio policies permit playback.
-- If the music does not play, check browser tab mute and site audio permissions.
-- The page currently prevents body scrolling and is designed primarily for a viewport-sized game screen.
+When the browser tab becomes hidden, the game pauses automatically. Select Resume after returning.
 
-## Known gaps
+## Audio
 
-There is no pause/resume, saved score, difficulty selection, tutorial overlay, mobile touch control, or persistent progress. See [known issues](known-issues.md) and [roadmap](../ROADMAP.md).
+Audio begins only after a player action. Some browsers or user settings may block playback. The game continues without audio and displays a brief message if playback is unavailable.
+
+## Reduced motion
+
+When the operating system or browser requests reduced motion, the game uses the static jungle background and a slower obstacle animation with a shorter jump movement.
