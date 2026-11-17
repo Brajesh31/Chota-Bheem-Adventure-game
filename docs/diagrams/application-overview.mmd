@@ -1,7 +1,7 @@
 flowchart TD
   Browser[Browser] --> HTML[index.html]
   HTML --> CSS[style.css]
-  HTML --> JS[script.js]
-  CSS --> Images[Local PNG and GIF assets]
-  JS --> Audio[Local MP3 assets]
-  HTML -. font stylesheet request .-> Fonts[Google Fonts]
+  HTML --> Controller[script.js ES module]
+  Controller --> Logic[game-logic.js]
+  Logic --> Tests[Node built-in unit tests]
+  Controller --> Media[Local PNG GIF MP3 assets]
