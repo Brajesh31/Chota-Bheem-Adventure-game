@@ -1,0 +1,74 @@
+name: Repository Quality Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-checks:
+    name: Documentation and static-file checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate required project files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in index.html style.css script.js README.md LICENSE SECURITY.md CONTRIBUTING.md CODE_OF_CONDUCT.md docs/README.md docs/gameplay.md docs/testing.md docs/known-issues.md docs/diagrams/README.md docs/runbooks/README.md docs/templates/README.md; do
+            test -s "$file" || { echo "Missing or empty: $file"; exit 1; }
+          done
+
+      - name: Validate local HTML, CSS and audio references
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, sys
+          html = Path("index.html").read_text()
+          css = Path("style.css").read_text()
+          js = Path("script.js").read_text()
+          refs = re.findall(r"""(?:src|href)=["']([^"']+)["']""", html)
+          refs += re.findall(r"""url\(["']?([^)"']+)""", css)
+          refs += re.findall(r"""new Audio\(["']([^"']+)["']\)""", js)
+          missing = []
+          for ref in refs:
+              if ref.startswith(("http://", "https://", "#", "data:")):
+                  continue
+              if not Path(ref).exists():
+                  missing.append(ref)
+          if missing:
+              print("Missing local references:", *missing, sep="\n- ")
+              sys.exit(1)
+          print(f"Checked {len(refs)} references.")
+          PY
+
+      - name: JavaScript syntax check
+        run: node --check script.js
+
+      - name: Parse YAML workflow and issue forms
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+          files = [Path(".github/workflows/quality-checks.yml")]
+          files += list(Path(".github/ISSUE_TEMPLATE").glob("*.yml"))
+          files += list(Path(".github/DISCUSSION_TEMPLATE").glob("*.yml"))
+          for path in files:
+              yaml.safe_load(path.read_text())
+              print("Valid YAML:", path)
+          PY
+
+      - name: Check Mermaid diagrams are non-empty
+        run: find docs/diagrams -name '*.mmd' -type f -size +0c -print | grep .
