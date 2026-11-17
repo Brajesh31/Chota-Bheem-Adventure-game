@@ -1,6 +1,6 @@
 # 📚 Documentation Hub
 
-This handbook describes the current game, source architecture, development process, operational checks, and project governance. It distinguishes implemented functionality from future ideas and known limitations.
+This handbook describes the current game, source architecture, development process, operational checks, privacy, and project governance. It distinguishes implemented functionality from future ideas and known limitations.
 
 ## 🧭 Start here
 
@@ -15,7 +15,9 @@ This handbook describes the current game, source architecture, development proce
 | Run unit and manual checks | [Testing](testing.md) |
 | Publish a static copy | [Deployment](deployment.md) |
 | Diagnose problems | [Troubleshooting](troubleshooting.md) |
-| Security and privacy | [Security notes](security.md) |
+| Security and privacy | [Security notes](security.md) and [privacy notes](privacy.md) |
+| Quality gates | [Quality assurance](quality-assurance.md) |
+| Understand the folders | [Project structure](project-structure.md) |
 | Release a change | [Release process](release-process.md) |
 | Remaining technical limitations | [Known issues](known-issues.md) |
 
@@ -24,6 +26,7 @@ This handbook describes the current game, source architecture, development proce
 - [API and integrations](api.md)
 - [Browser support](browser-support.md)
 - [Configuration](configuration.md)
+- [Database and persistence boundary](database.md)
 - [Data and state model](data-model.md)
 - [Performance notes](performance.md)
 - [Decision log](decision-log.md)
@@ -32,6 +35,8 @@ This handbook describes the current game, source architecture, development proce
 - [Diagrams and SVG flow illustration](diagrams/README.md)
 - [Runbooks](runbooks/README.md)
 - [Reusable templates](templates/README.md)
+- [Script documentation](../scripts/README.md)
+- [Test documentation](../tests/README.md)
 
 ## ✅ Current project boundary
 
@@ -43,4 +48,4 @@ The root MIT grant applies only to original code and documentation attributed to
 
 ## 🧭 Contribution standard
 
-Gameplay changes should update the README and relevant gameplay, architecture, testing, troubleshooting, and known-issues documentation. New media requires documented redistribution permission. Do not mark manual verification as complete unless it was actually performed.
+Gameplay changes should update the README and relevant gameplay, architecture, testing, troubleshooting, privacy, and known-issues documentation. New media requires documented redistribution permission. Do not mark manual verification as complete unless it was actually performed.
