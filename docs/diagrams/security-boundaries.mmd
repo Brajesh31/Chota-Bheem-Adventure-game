@@ -1,0 +1,7 @@
+flowchart TD
+  User[Player] --> Browser[Browser runtime]
+  Browser --> PublicCode[Public HTML CSS JavaScript]
+  Browser --> LocalMedia[Bundled image GIF audio]
+  Browser -->|External request| Font[Google Fonts]
+  PublicCode -. No secret boundary .-> Warning[Never embed credentials in client code]
+  LocalMedia -. Rights need review .-> Rights[Third-party media excluded from MIT grant]
