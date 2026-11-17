@@ -98,7 +98,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleKeydown(event) {
-    if (!state.running || state.paused) return;
+    if (!state.running) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      togglePause();
+      return;
+    }
+    if (state.paused) return;
 
     const actions = {
       ArrowLeft: "left",
