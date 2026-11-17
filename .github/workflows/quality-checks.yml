@@ -16,59 +16,44 @@ concurrency:
 
 jobs:
   repository-checks:
-    name: Documentation and static-file checks
+    name: Static game tests and repository validation
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Validate required project files
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate source syntax
+        run: |
+          node --check script.js
+          node --check game-logic.js
+          node --check scripts/validate-repository.mjs
+
+      - name: Validate repository and local references
+        run: npm run validate
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Validate documentation and workflow files
         shell: bash
         run: |
           set -euo pipefail
-          for file in index.html style.css script.js README.md LICENSE SECURITY.md CONTRIBUTING.md CODE_OF_CONDUCT.md docs/README.md docs/gameplay.md docs/testing.md docs/known-issues.md docs/diagrams/README.md docs/runbooks/README.md docs/templates/README.md; do
+          for file in README.md LICENSE SECURITY.md CONTRIBUTING.md CODE_OF_CONDUCT.md docs/README.md docs/gameplay.md docs/testing.md docs/known-issues.md docs/diagrams/README.md docs/runbooks/README.md docs/templates/README.md .github/ISSUE_TEMPLATE/bug_report.yml .github/ISSUE_TEMPLATE/feature_request.yml .github/PULL_REQUEST_TEMPLATE.md .github/workflows/quality-checks.yml; do
             test -s "$file" || { echo "Missing or empty: $file"; exit 1; }
           done
-
-      - name: Validate local HTML, CSS and audio references
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re, sys
-          html = Path("index.html").read_text()
-          css = Path("style.css").read_text()
-          js = Path("script.js").read_text()
-          refs = re.findall(r"""(?:src|href)=["']([^"']+)["']""", html)
-          refs += re.findall(r"""url\(["']?([^)"']+)""", css)
-          refs += re.findall(r"""new Audio\(["']([^"']+)["']\)""", js)
-          missing = []
-          for ref in refs:
-              if ref.startswith(("http://", "https://", "#", "data:")):
-                  continue
-              if not Path(ref).exists():
-                  missing.append(ref)
-          if missing:
-              print("Missing local references:", *missing, sep="\n- ")
-              sys.exit(1)
-          print(f"Checked {len(refs)} references.")
-          PY
-
-      - name: JavaScript syntax check
-        run: node --check script.js
-
-      - name: Parse YAML workflow and issue forms
-        run: |
           python - <<'PY'
           from pathlib import Path
           import yaml
-          files = [Path(".github/workflows/quality-checks.yml")]
+          files = [Path(".github/workflows/quality-checks.yml"), Path(".github/dependabot.yml")]
           files += list(Path(".github/ISSUE_TEMPLATE").glob("*.yml"))
           files += list(Path(".github/DISCUSSION_TEMPLATE").glob("*.yml"))
           for path in files:
               yaml.safe_load(path.read_text())
               print("Valid YAML:", path)
           PY
-
-      - name: Check Mermaid diagrams are non-empty
-        run: find docs/diagrams -name '*.mmd' -type f -size +0c -print | grep .
+          find docs/diagrams -name '*.mmd' -type f -size +0c -print | grep .
