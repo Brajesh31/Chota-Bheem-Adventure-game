@@ -179,4 +179,4 @@ Start with the [documentation hub](docs/README.md). It links setup, gameplay, ar
 
 <p align="center">Made with ❤️ using HTML, CSS, and JavaScript.</p>
 
-Last updated: 2026-11-17 12:04 UTC
+Last updated: 2026-11-17 12:06 UTC
