@@ -193,4 +193,4 @@ Start at the [documentation hub](docs/README.md). It includes gameplay, architec
   Made with ❤️ using HTML, CSS, and JavaScript.
 </p>
 
-Last updated: 2026-11-17 11:45 UTC
+Last updated: 2026-11-17 11:46 UTC
