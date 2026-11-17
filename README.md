@@ -61,7 +61,7 @@ A browser-based jungle obstacle game built with **HTML, CSS, and vanilla JavaScr
 | Pause | Pause the active session |
 | Resume | Continue the same session |
 | Play Again | Start a fresh session after game over |
-| Back to Start | Stop the session and return to the title screen |
+| Back to Start / Exit | Stop the session and return to the title screen |
 
 The game pauses when the browser tab becomes hidden. Resume manually when you return.
 
