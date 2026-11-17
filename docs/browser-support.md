@@ -1,26 +1,26 @@
 # 🌐 Browser Support
 
-## Support target
+## Intended support
 
-The project targets current desktop browsers with JavaScript, CSS animations, keyboard events, computed styles, and browser audio support. No formal cross-browser compatibility matrix or automated browser test is maintained.
+The game targets current desktop and mobile browsers with ES modules, CSS animations, DOM events, `requestAnimationFrame`, audio playback, and touch/click handling.
 
-| Environment | Expected status | Notes |
+| Environment | Intended status | Verification required |
 |---|---|---|
-| Current Chromium-based desktop browser | Intended target | Verify audio permissions and keyboard handling |
-| Current Firefox desktop | Expected to work | Manually verify computed-style parsing and audio |
-| Current Safari desktop | Expected to work with checks | Verify local assets and audio behavior |
-| Mobile browser | Not a supported control target | No touch controls are implemented |
+| Current Chromium desktop | Primary target | Keyboard, layout, audio, reduced motion |
+| Current Firefox desktop | Intended | ES module loading, collision feel, audio |
+| Current Safari desktop | Intended | Audio gesture handling, CSS animation, focus |
+| Current Android browser | Touch target | On-screen controls, narrow layout, audio |
+| Current iOS Safari | Touch target | Touch button behavior, viewport height, audio |
 
-These are intended targets, not test results. Verify on the actual browser versions before making compatibility claims.
+This is a support intention, not a claim that every listed browser version has been tested. The repository CI runs Node.js unit tests and validation, not browser automation.
 
-## Browser requirements
+## Runtime requirements
 
-- JavaScript enabled.
-- CSS animation support.
-- DOM and keyboard event support.
-- Audio playback permitted after user interaction.
-- Local media files available at their expected relative paths.
+- JavaScript modules enabled.
+- CSS animations and DOM geometry APIs supported.
+- Local PNG/GIF/MP3 assets served with the site.
+- Audio playback permitted by the browser after a user gesture.
 
-## Reporting a compatibility issue
+## Reporting compatibility problems
 
-Include exact browser version, operating system, screen size, whether the page was opened as a file or served over HTTP, and console/network errors.
+Include the exact browser/version, OS/device, viewport size, whether the page was opened directly or served over HTTP, control method, and safe console/network errors.
