@@ -1,0 +1,33 @@
+name: '✨ Feature request'
+description: Suggest a focused gameplay or developer-experience improvement
+title: '[Feature]: '
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Player problem
+      description: What is difficult or missing today?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility and input considerations
+  - type: textarea
+    id: assets
+    attributes:
+      label: New assets or external services
+      description: Include source and permission details.
