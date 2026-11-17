@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const restartButton = document.getElementById("restartButton");
   const backButton = document.getElementById("backButton");
   const pauseButton = document.getElementById("pauseButton");
+  const exitButton = document.getElementById("exitButton");
   const gameContainer = document.getElementById("gameContainer");
   const player = document.querySelector(".bheem");
   const obstacle = document.querySelector(".bull");
@@ -170,6 +171,8 @@ document.addEventListener("DOMContentLoaded", () => {
     state.running = true;
     state.paused = false;
     state.score = 0;
+    backgroundAudio.pause();
+    backgroundAudio.currentTime = 0;
     gameOverAudio.pause();
     gameOverAudio.currentTime = 0;
     state.scoredThisPass = false;
@@ -236,6 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
   restartButton.addEventListener("click", startGame);
   backButton.addEventListener("click", returnToStart);
   pauseButton.addEventListener("click", togglePause);
+  exitButton.addEventListener("click", returnToStart);
   document.addEventListener("keydown", handleKeydown);
 
   controlButtons.forEach((button) => {
