@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in README.md LICENSE SECURITY.md CONTRIBUTING.md CODE_OF_CONDUCT.md docs/README.md docs/gameplay.md docs/testing.md docs/known-issues.md docs/diagrams/README.md docs/runbooks/README.md docs/templates/README.md .github/ISSUE_TEMPLATE/bug_report.yml .github/ISSUE_TEMPLATE/feature_request.yml .github/PULL_REQUEST_TEMPLATE.md .github/workflows/quality-checks.yml; do
+          for file in README.md LICENSE SECURITY.md PRIVACY.md GOVERNANCE.md ACKNOWLEDGMENTS.md CONTRIBUTING.md CODE_OF_CONDUCT.md docs/README.md docs/gameplay.md docs/testing.md docs/known-issues.md docs/diagrams/README.md docs/runbooks/README.md docs/templates/README.md .github/ISSUE_TEMPLATE/bug_report.yml .github/ISSUE_TEMPLATE/feature_request.yml .github/PULL_REQUEST_TEMPLATE.md .github/workflows/quality-checks.yml; do
             test -s "$file" || { echo "Missing or empty: $file"; exit 1; }
           done
           python - <<'PY'
