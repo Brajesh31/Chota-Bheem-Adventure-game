@@ -1,11 +1,13 @@
 # Runbook: Local Launch
 
 1. Clone or download the repository.
-2. Open the repository directory.
-3. Open `index.html` or run `python -m http.server 8000`.
+2. Open a terminal in the repository root.
+3. Start a static HTTP server: `python -m http.server 8000`.
 4. Visit `http://localhost:8000`.
-5. Confirm the start page and local images load.
-6. Start the game and verify keyboard input.
-7. Check the browser console for missing files or JavaScript exceptions.
+5. Confirm the favicon and start screen load.
+6. Start a game and verify keyboard or on-screen controls.
+7. Test pause/resume, collision, Play Again, and Back to Start.
+8. Check the browser console for module-loading or missing-asset errors.
+9. Run `npm test` and `npm run validate` with Node.js 22+ when validating a code change.
 
-If the page works from a static server but not as a local file, use the static server for development and record the browser-specific error.
+The native JavaScript ES module should be tested through HTTP rather than opened directly from `file://`.
