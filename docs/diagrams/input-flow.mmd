@@ -1,0 +1,7 @@
+flowchart TD
+  A[Keyboard keydown] --> B{Key}
+  B -->|Arrow Up| C[Add jump animation class]
+  C --> D[Remove class after timeout]
+  B -->|Arrow Left| E[Subtract 112px from left]
+  B -->|Arrow Right| F[Add 112px to left]
+  B -->|Other| G[No game action]
