@@ -57,6 +57,7 @@ A browser-based jungle obstacle game built with **HTML, CSS, and vanilla JavaScr
 | ⬅️ Arrow Left | Move left |
 | ➡️ Arrow Right | Move right |
 | On-screen Left / Jump / Right | Touch or mouse controls |
+| Escape | Toggle pause/resume |
 | Pause | Pause the active session |
 | Resume | Continue the same session |
 | Play Again | Start a fresh session after game over |
