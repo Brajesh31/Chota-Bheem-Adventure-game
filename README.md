@@ -1,121 +1,125 @@
 # 🎮 Chota Bheem Adventures
 
-A lightweight browser-based obstacle game built with **HTML, CSS, and vanilla JavaScript**. Start the game, guide the character with the arrow keys, jump over the moving bull, and try to increase your score.
+A browser-based jungle obstacle game built with **HTML, CSS, and vanilla JavaScript**. Start a run, move the player, jump over the moving bull, and build a score by surviving each pass.
 
 <p align="center">
-  <img src="frontPage.png" alt="Chota Bheem Adventures start screen artwork" width="720">
+  <img src="frontPage.png" alt="Start screen artwork from the bundled game assets" width="720">
 </p>
 
 <p align="center">
   <a href="https://github.com/Brajesh31/Chota-Bheem-Adventure-game/actions/workflows/quality-checks.yml"><img src="https://github.com/Brajesh31/Chota-Bheem-Adventure-game/actions/workflows/quality-checks.yml/badge.svg" alt="Repository quality checks"></a>
   <img src="https://img.shields.io/badge/HTML5-static-orange?logo=html5" alt="HTML5">
-  <img src="https://img.shields.io/badge/CSS3-animations-blue?logo=css3" alt="CSS3">
-  <img src="https://img.shields.io/badge/JavaScript-vanilla-yellow?logo=javascript" alt="Vanilla JavaScript">
-  <img src="https://img.shields.io/badge/Build-none-lightgrey" alt="No build required">
-  <img src="https://img.shields.io/badge/Backend-none-lightgrey" alt="No backend">
+  <img src="https://img.shields.io/badge/CSS3-responsive-blue?logo=css3" alt="CSS3">
+  <img src="https://img.shields.io/badge/JavaScript-ES%20modules-yellow?logo=javascript" alt="JavaScript ES modules">
+  <img src="https://img.shields.io/badge/Dependencies-zero-brightgreen" alt="Zero runtime dependencies">
+  <img src="https://img.shields.io/badge/Tests-Node%20built--in-blue" alt="Node built-in tests">
 </p>
 
-<p align="center">
-  <b>Simple setup · Browser-based · Keyboard controls · No dependencies</b>
-</p>
+<p align="center"><b>Static browser game · Keyboard + touch controls · Pause and restart · No backend</b></p>
 
-> **Project status:** A small playable prototype. The repository currently has a static game page, keyboard movement, CSS animations, collision/score polling, and local audio. It does not currently provide touch controls, saved scores, pause/resume, or an in-page restart.
+> **Status:** Playable browser prototype. The game now includes a managed session loop, collision stop, bounded movement, scoring, difficulty limits, pause/resume, restart, touch controls, and reduced-motion handling. Browser-level visual and assistive-technology testing remains a manual task.
 
 ## 📑 Contents
 
-- [✨ Overview](#-overview)
-- [🕹️ How to play](#️-how-to-play)
-- [🧰 Requirements and setup](#-requirements-and-setup)
-- [🧠 How it works](#-how-it-works)
-- [🗂️ Repository structure](#️-repository-structure)
-- [🧪 Testing](#-testing)
-- [⚠️ Known limitations](#️-known-limitations)
-- [🛡️ Security and privacy](#️-security-and-privacy)
-- [🎨 Assets and licensing](#-assets-and-licensing)
+- [✨ Features](#-features)
+- [🕹️ Controls](#️-controls)
+- [🚀 Run locally](#-run-locally)
+- [🧠 Game flow](#-game-flow)
+- [🧪 Tests and validation](#-tests-and-validation)
+- [🗂️ Project structure](#️-project-structure)
+- [♿ Accessibility](#-accessibility)
+- [⚠️ Remaining limitations](#️-remaining-limitations)
+- [🛡️ Security and licensing](#️-security-and-licensing)
 - [🤝 Contributing](#-contributing)
-- [🧭 Roadmap](#-roadmap)
 - [📚 Documentation](#-documentation)
 
-## ✨ Overview
+## ✨ Features
 
-The game uses three primary source files:
-
-| File | Responsibility |
+| Feature | Behavior |
 |---|---|
-| `index.html` | Start screen, game screen, score element, and script/style links |
-| `style.css` | Page layout, visual assets, character jump, and obstacle animation |
-| `script.js` | Start action, keyboard input, collision polling, score, and audio |
+| 🏃 Game loop | One `requestAnimationFrame` loop per active session |
+| 💥 Collision | Inset rectangular hitboxes; game-over transition happens once |
+| 🏆 Score | One point per successfully cleared obstacle |
+| 📈 Difficulty | Obstacle accelerates with a lower animation-duration limit |
+| ↔️ Movement | Keyboard and on-screen controls, clamped to game bounds |
+| ⏸️ Pause/resume | Suspends the loop, obstacle and background audio |
+| 🔁 Restart | Resets score, player position, obstacle and audio state |
+| 📱 Touch input | On-screen left, jump and right controls |
+| ♿ Reduced motion | Static jungle background and reduced animation |
+| 🔊 Audio fallback | Playback errors are caught; the game remains playable |
+| 🧪 Unit tests | Pure game-logic helpers tested by Node's built-in runner |
 
-The game runs entirely in the browser. There is no server, REST API, database, account system, package manager, or build pipeline.
+## 🕹️ Controls
 
-## 🕹️ How to play
-
-1. Open the game in a modern desktop browser.
-2. Select **Lets Run** on the start screen.
-3. Use the keyboard to avoid the bull.
-4. Let the obstacle pass safely to increase your score.
-5. After a collision, reload the page to start another session.
-
-| Key | Action |
+| Input | Action |
 |---|---|
-| ⬆️ Arrow Up | Jump |
+| ⬆️ Arrow Up or Space | Jump |
 | ⬅️ Arrow Left | Move left |
 | ➡️ Arrow Right | Move right |
+| On-screen Left / Jump / Right | Touch or mouse controls |
+| Pause | Pause the active session |
+| Resume | Continue the same session |
+| Play Again | Start a fresh session after game over |
+| Back to Start | Stop the session and return to the title screen |
 
-**Audio:** Background music begins after the start-button interaction. Browser mute settings and autoplay policies may affect playback.
+The game pauses when the browser tab becomes hidden. Resume manually when you return.
 
-## 🧰 Requirements and setup
+## 🚀 Run locally
 
-- Modern desktop browser
-- JavaScript enabled
-- A local clone or downloaded copy of the repository
+### Play the game
 
-No npm install or environment secrets are needed.
+The game uses native JavaScript modules. A local HTTP server is the most reliable way to run it.
 
 ```bash
 git clone https://github.com/Brajesh31/Chota-Bheem-Adventure-game.git
 cd Chota-Bheem-Adventure-game
-```
-
-Open `index.html` directly, or serve the directory locally:
-
-```bash
 python -m http.server 8000
 ```
 
-Visit `http://localhost:8000`.
+Open **http://localhost:8000**.
 
-See [Installation](docs/installation.md) for details.
+No npm install, backend, database, API key, or external JavaScript library is needed to play. The game uses local assets and system fonts.
 
-## 🧠 How it works
+### Run developer checks
 
-### Application flow
+For tests, install Node.js 22 or later:
 
-```mermaid
-flowchart TD
-  A[Open index.html] --> B[Start screen]
-  B -->|Click Lets Run| C[Show game screen]
-  C --> D[Start audio and game loop]
-  D --> E[Read positions and handle input]
-  E --> F{Collision?}
-  F -->|No, safe crossing| G[Update score]
-  G --> E
-  F -->|Yes| H[Show game-over message]
-  H --> I[Reload page to play again]
+```bash
+npm test
+npm run validate
+npm run check
 ```
 
-### Current runtime model
+There are no third-party npm dependencies. `npm test` runs Node's built-in test runner. `npm run validate` checks required files, local Markdown links, and local runtime asset references.
 
-- CSS keyframes animate the jump and moving obstacle.
-- JavaScript listens for arrow-key events.
-- A 10 ms interval reads computed element positions.
-- The score is held in a local variable and displayed in the page.
-- Media is loaded from local relative paths.
-- The only currently documented external request is the Google Fonts stylesheet.
+## 🧠 Game flow
 
-This diagram describes the current code, not an idealized future architecture.
+<p align="center">
+  <img src="docs/assets/game-loop.svg" alt="Game session flow: start, gameplay loop, score or collision, restart" width="900">
+</p>
 
-## 🗂️ Repository structure
+The controller uses one animation-frame loop while the game is active. A collision cancels the loop and pauses the obstacle. A successful pass increments the score once. Pause suspends the session; restart initializes a fresh session.
+
+The source is split into browser behavior and pure logic:
+
+- `script.js`: DOM, controls, audio, session state, and animation loop.
+- `game-logic.js`: collision geometry, obstacle pass detection, movement bounds, hitbox inset, and difficulty calculation.
+- `tests/game-logic.test.js`: unit tests for the pure helpers.
+
+## 🧪 Tests and validation
+
+Current automated coverage includes geometry intersection, obstacle pass detection, player clamping, difficulty limits, and hitbox insets.
+
+GitHub Actions also checks:
+- JavaScript syntax.
+- Required repository files and local references.
+- Markdown links.
+- YAML workflow and issue forms.
+- Non-empty Mermaid diagrams.
+
+**Not automated:** actual browser rendering, sound playback, mobile device testing, cross-browser gameplay, screenshots, or WCAG conformance. Follow [docs/testing.md](docs/testing.md) for the manual regression checklist.
+
+## 🗂️ Project structure
 
 ```text
 .
@@ -125,72 +129,51 @@ This diagram describes the current code, not an idealized future architecture.
 │   ├── workflows/
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── docs/
+│   ├── assets/
 │   ├── diagrams/
 │   ├── runbooks/
-│   ├── templates/
-│   └── project guides
+│   └── templates/
+├── tests/
+│   └── game-logic.test.js
+├── scripts/
+│   └── validate-repository.mjs
 ├── index.html
 ├── style.css
 ├── script.js
-├── frontPage.png
-├── jungle.gif
-├── bheem.gif
-├── bull.gif
-├── *.mp3
-├── README.md
-├── LICENSE
-├── SECURITY.md
-├── CONTRIBUTING.md
-└── CHANGELOG.md
+├── game-logic.js
+├── favicon.svg
+└── local image, GIF and audio assets
 ```
 
-The repository also contains PNG and GIF variants that are not currently referenced by the running page. The [asset inventory](docs/assets.md) distinguishes used and unused media.
+## ♿ Accessibility
 
-## 🧪 Testing
+Semantic buttons, keyboard focus indicators, live score/status announcements, touch controls, and a reduced-motion treatment are implemented. A formal screen-reader and WCAG conformance audit has **not** been completed. See [docs/accessibility.md](docs/accessibility.md).
 
-There is no automated browser test suite in the application at this time. Use the [manual test checklist](docs/testing.md) to check the start flow, keyboard controls, score, collision, assets, and viewport behavior.
+## ⚠️ Remaining limitations
 
-The GitHub Actions workflow checks required files, local references, JavaScript syntax, YAML parsing, and non-empty Mermaid sources. It does **not** run interactive browser tests or prove gameplay correctness.
+- Collision still uses simplified rectangular hitboxes, not a per-pixel physics model.
+- Touch movement is discrete rather than press-and-hold.
+- No saved high score, user profile, leaderboard, or multiplayer service.
+- Game balance needs playtesting across device sizes.
+- Automated tests do not exercise the actual browser DOM, CSS animations, or audio.
+- The bundled branded character artwork and music have no documented redistribution grant in this repository.
 
-## ⚠️ Known limitations
+See [docs/known-issues.md](docs/known-issues.md) and [ROADMAP.md](ROADMAP.md).
 
-- No mobile/touch controls.
-- No pause, resume, settings, or in-page restart.
-- Score is not persisted.
-- Player movement is not clamped to the viewport.
-- The collision interval is not explicitly cleared after game over.
-- Several variables in the current script are assigned without declarations.
-- Audio playback promise failures are not handled.
-- Reduced-motion and screen-reader status support are incomplete.
+## 🛡️ Security and licensing
 
-See [Known issues](docs/known-issues.md) and [Roadmap](ROADMAP.md). These are documented limitations, not fixes delivered by this repository enhancement.
+This is a static client-side project. Never place credentials in browser files. There is no application backend or data store. See [SECURITY.md](SECURITY.md) and [docs/security.md](docs/security.md).
 
-## 🛡️ Security and privacy
-
-This static game has no user account system, backend, database, or application-managed persistence. Do not add private credentials to frontend files. The Google Fonts stylesheet causes a request to an external provider. Read [SECURITY.md](SECURITY.md) and the [security notes](docs/security.md).
-
-## 🎨 Assets and licensing
-
-The repository includes character images, animations, and audio. Their redistribution rights are not established by this repository metadata.
-
-The root [MIT LICENSE](LICENSE) is intentionally scoped to original code and documentation authored by **Brajesh Kumar (@brajesh31)**. It does **not** grant rights to the Chota Bheem character, associated trademarks, third-party images/GIFs, or audio. Verify permissions independently before copying or redistributing those assets.
+The root MIT license is attributed to **Brajesh Kumar (@brajesh31)** and applies only to original source code and documentation. It expressly excludes the Chota Bheem character, related trademarks, third-party images/GIFs, and audio. Verify rights before redistributing any such assets. See [LICENSE](LICENSE).
 
 ## 🤝 Contributing
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md), follow the [Code of Conduct](CODE_OF_CONDUCT.md), and use the issue/PR templates. Contributions that add media must include rights and attribution details.
-
-## 🧭 Roadmap
-
-Potential work includes a proper game-session lifecycle, bounded player movement, restart/pause, touch controls, better accessibility, and rights-cleared media. See [ROADMAP.md](ROADMAP.md).
+Read [CONTRIBUTING.md](CONTRIBUTING.md), follow the [Code of Conduct](CODE_OF_CONDUCT.md), and use the GitHub issue and pull-request templates. Record permissions for all new media contributions.
 
 ## 📚 Documentation
 
-Start at the [documentation hub](docs/README.md). It includes gameplay, architecture, configuration, data model, accessibility, testing, performance, troubleshooting, release guidance, diagrams, runbooks, and reusable templates.
+Start with the [documentation hub](docs/README.md). It links setup, gameplay, architecture, API boundary, configuration, data model, assets, testing, accessibility, browser support, security, performance, troubleshooting, release guidance, seven diagrams, six operational runbooks, and eight reusable templates.
 
 ---
 
-<p align="center">
-  Made with ❤️ using HTML, CSS, and JavaScript.
-</p>
-
-Last updated: 2026-11-17 11:53 UTC
+<p align="center">Made with ❤️ using HTML, CSS, and JavaScript.</p>
