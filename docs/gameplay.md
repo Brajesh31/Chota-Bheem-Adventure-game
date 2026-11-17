@@ -22,6 +22,7 @@ Avoid the moving bull for as long as possible. Each obstacle pass that clears th
 | On-screen Left | Move left |
 | On-screen Jump | Jump |
 | On-screen Right | Move right |
+| Escape | Toggle pause/resume |
 | Pause | Pause the session |
 | Resume | Continue the paused session |
 
