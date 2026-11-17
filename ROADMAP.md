@@ -1,16 +1,28 @@
 # Roadmap
 
-This is a directional list for the current static game. It has no delivery dates and does not promise that any item will be implemented.
+This is a directional plan for the current static browser game. It has no delivery dates and does not promise that an item will be implemented.
 
-## Possible improvements
+## ✅ Implemented in the current source
 
-- Stop the collision interval and audio cleanly when the game ends.
-- Add an in-page restart button and a clear game-over state.
-- Add touch controls and visible keyboard instructions.
-- Bound left/right movement and handle repeated key presses predictably.
-- Review jump height and collision thresholds across viewport sizes.
-- Add score/collision tests or a small manual test checklist.
-- Confirm reuse rights and attribution for all bundled artwork, animation, and music before redistributing assets.
+- [x] Stop the game loop on collision, pause, and return to title.
+- [x] Add a restart action and explicit game-over panel.
+- [x] Add touch-friendly on-screen movement and jump controls.
+- [x] Bound player horizontal movement to the game area.
+- [x] Add a minimum obstacle animation duration.
+- [x] Catch browser audio playback failures without stopping gameplay.
+- [x] Respect reduced-motion preference with a static background and slower motion.
+- [x] Add unit tests for pure collision, movement, and difficulty helpers.
+- [x] Add repository validation and CI checks.
+
+## 🔜 Possible next improvements
+
+- [ ] Confirm rights to all current character art and audio, or replace them with original/licensed assets.
+- [ ] Tune collision hitboxes and jump timing through repeatable playtesting.
+- [ ] Add browser automation for Chromium and Firefox.
+- [ ] Run a screen-reader and WCAG-focused accessibility review.
+- [ ] Consider a nonvisual or simplified alternative gameplay mode.
+- [ ] Consider optional session high scores with a clear reset control and privacy documentation.
+- [ ] Add press-and-hold movement support after validating touch interaction behavior.
 
 ## Propose work
 
