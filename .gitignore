@@ -14,3 +14,8 @@ Thumbs.db
 # Local build output if a build system is added later.
 /dist/
 /build/
+
+# Node.js test tooling output
+node_modules/
+.npm/
+coverage/
