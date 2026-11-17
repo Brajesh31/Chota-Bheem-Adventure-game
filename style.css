@@ -224,6 +224,11 @@ kbd {
   gap: 1rem;
 }
 
+.toolbar-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .score-count {
   margin: 0;
   border: 1px solid rgb(255 255 255 / 50%);
