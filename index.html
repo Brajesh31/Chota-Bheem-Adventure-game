@@ -1,37 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#163c2d">
+    <meta name="description" content="A lightweight keyboard-controlled jungle obstacle game.">
     <title>Chota Bheem Adventures</title>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Start Page -->
-    <div id="startPage">
-        <div class="startContent">
-            <h1 class="gameTitle">Chota Bheem Adventures</h1>
-            <p class="gameDescription">With each powerful jump, Chota Bheem showcases his skills, dodging the bull's fierce charges and unleashing his unmatched bravery.</p>
-            <button id="startButton">Lets Run</button>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="startPage" class="screen start-screen" aria-labelledby="gameTitle">
+        <div class="start-card">
+          <p class="eyebrow">Jungle runner</p>
+          <h1 id="gameTitle" class="game-title">Chota Bheem Adventures</h1>
+          <p class="game-description">
+            Jump, dodge the charging bull, and see how long you can keep your run going.
+          </p>
+          <div class="instruction-panel" aria-label="Game controls">
+            <h2>How to play</h2>
+            <p><kbd>↑</kbd> or <kbd>Space</kbd> to jump</p>
+            <p><kbd>←</kbd> and <kbd>→</kbd> to move</p>
+            <p>On mobile, use the buttons below the game.</p>
+          </div>
+          <button id="startButton" class="primary-button" type="button">Let's Run</button>
+          <p class="small-note">Audio starts after you begin. You can mute this browser tab at any time.</p>
         </div>
-    </div>
+      </section>
 
-    <!-- Game Page -->
-    <div id="gamePage" style="display: none;">
-        <div class="gameContainer">
-            <div class="gameOver">Welcome to Chota bheem Adventures</div>
-            <div class="bheem"></div>
-            <div id="scoreCount">Your Score: 0</div>
-            <div class="bull bullAni"></div>
+      <section id="gamePage" class="screen game-screen" aria-label="Game area" hidden>
+        <div id="gameContainer" class="game-container">
+          <div class="game-topbar">
+            <p id="scoreCount" class="score-count" aria-live="polite" aria-atomic="true">Score: 0</p>
+            <button id="pauseButton" class="secondary-button" type="button" disabled>Pause</button>
+          </div>
+          <p id="gameStatus" class="game-status" role="status" aria-live="polite">
+            Avoid the bull. Use the arrow keys, Space, or the on-screen controls.
+          </p>
+          <div class="bheem" role="img" aria-label="Player character"></div>
+          <div class="bull" role="img" aria-label="Moving bull obstacle"></div>
+
+          <div id="gameOverPanel" class="game-over-panel" role="group" aria-labelledby="gameOverTitle" hidden>
+            <p class="eyebrow">Run finished</p>
+            <h2 id="gameOverTitle">Game Over</h2>
+            <p id="finalScore">Your score: 0</p>
+            <div class="panel-actions">
+              <button id="restartButton" class="primary-button" type="button">Play Again</button>
+              <button id="backButton" class="secondary-button" type="button">Back to Start</button>
+            </div>
+          </div>
         </div>
-    </div> 
 
-    <!-- Overlay with GIF Image -->
-    <div id="overlay" style="display: none;">
-        <img src="bheem.gif" alt="GIF Image">
-    </div>
+        <div class="mobile-controls" aria-label="Touch game controls">
+          <button type="button" data-action="left" aria-label="Move left">← <span>Left</span></button>
+          <button type="button" data-action="jump" aria-label="Jump">↑ <span>Jump</span></button>
+          <button type="button" data-action="right" aria-label="Move right">→ <span>Right</span></button>
+        </div>
+        <p id="audioStatus" class="audio-status" role="status" aria-live="polite"></p>
+        <p class="game-help">Keyboard: ← / → move · ↑ / Space jump · Pause to take a break</p>
+      </section>
+    </main>
 
-    <script src="script.js"></script>
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
