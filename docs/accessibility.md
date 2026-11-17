@@ -1,20 +1,22 @@
 # ♿ Accessibility Notes
 
-## Current state
+## Improvements in the current implementation
 
-This page is a visual keyboard-controlled game. The start action is a semantic button, and the game controls use arrow keys. The current implementation is not a complete accessible game experience.
+- Start, pause, resume, restart, return-to-title, and touch controls are semantic buttons.
+- Keyboard focus uses a visible focus indicator.
+- The score and game status are announced through live regions.
+- The player and obstacle have accessible labels.
+- On-screen movement and jump controls are available on narrow/touch screens.
+- The page observes the `prefers-reduced-motion` setting by switching to the static jungle background and reducing motion.
 
-Known limitations: gameplay instructions are not persistently visible; score and game-over changes are not explicitly announced as live regions; character and bull are background images; there is no touch or alternative input; CSS animation has no reduced-motion handling; contrast and text scaling have not been audited; focus behavior after starting has not been deliberately managed.
+## Remaining limitations
 
-## Recommended improvements
-
-1. Add visible, concise control instructions.
-2. Announce score and game-over updates through appropriately scoped live regions.
-3. Add a pause/reduced-motion mode and respect `prefers-reduced-motion`.
-4. Provide on-screen touch controls without removing keyboard support.
-5. Test focus visibility, zoom, contrast, and screen-reader announcements.
-6. Avoid conveying game state through color alone.
+- No formal WCAG conformance audit has been completed.
+- The player artwork is still visually represented by a CSS background image.
+- Hitbox feedback and obstacle state are not fully narrated for screen-reader users.
+- The game remains a visually demanding reaction game and does not provide an alternative nonvisual game mode.
+- Color contrast and zoom behavior still require manual validation on target devices.
 
 ## Verification
 
-Test with keyboard-only navigation, browser zoom, reduced-motion preference, and at least one screen reader. Record actual browser and assistive technology versions. Do not claim WCAG conformance without a scoped audit.
+Test keyboard-only navigation, focus visibility, browser zoom, reduced-motion preference, touch target size, and at least one screen reader. Record browser and assistive technology versions. Do not claim WCAG conformance without a scoped audit.
