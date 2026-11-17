@@ -1,7 +1,7 @@
 flowchart TD
-  A[Keyboard keydown] --> B{Key}
-  B -->|Arrow Up| C[Add jump animation class]
-  C --> D[Remove class after timeout]
-  B -->|Arrow Left| E[Subtract 112px from left]
-  B -->|Arrow Right| F[Add 112px to left]
-  B -->|Other| G[No game action]
+  A[Keyboard or on-screen button] --> B{Session active and not paused?}
+  B -->|No| C[Ignore gameplay action]
+  B -->|Yes| D{Requested action}
+  D -->|Arrow Left / Left button| E[Clamp player left]
+  D -->|Arrow Right / Right button| F[Clamp player right]
+  D -->|Arrow Up / Space / Jump button| G[Restart jump animation]
