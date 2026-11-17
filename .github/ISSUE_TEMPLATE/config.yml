@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: '📖 Documentation'
+    url: https://github.com/Brajesh31/Chota-Bheem-Adventure-game/tree/main/docs
+    about: Read setup, gameplay, and troubleshooting guides.
+  - name: '🔐 Private security report'
+    url: https://github.com/Brajesh31/Chota-Bheem-Adventure-game/security/advisories/new
+    about: Report a suspected vulnerability privately when GitHub reporting is enabled.
