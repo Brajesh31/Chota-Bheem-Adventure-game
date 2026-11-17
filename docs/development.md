@@ -1,41 +1,59 @@
-# Development
+# 🧑‍💻 Development Guide
 
-## Project workflow
+## Requirements
 
-The project has no build system, package manager, or automated test command. Edit `index.html`, `style.css`, or `script.js`, then reload the page in a browser. A local static file server can be used when browser policies interfere with asset loading.
+- A current desktop browser.
+- Node.js 22 or later for the repository validation and test commands.
+- A local clone of this repository.
 
-## Main behavior
+The playable game does not need Node.js or npm. Node is used only for the development checks. There are no third-party npm dependencies.
 
-- The start-button listener switches from the title screen to the game and starts audio/game logic.
-- Keyboard handling uses Up for a temporary jump class and Left/Right to change the character's position.
-- A 10 ms interval reads computed style positions and compares horizontal/vertical offsets for collision.
-- A successful obstacle crossing increments the score and reduces the bull animation duration by 0.1 seconds.
-- On collision, the game-over text changes, the bull animation class is removed, the game-over audio plays, and background audio is paused after a delay.
+## Start the game
 
-## Suggested manual checks
+Open `index.html` directly, or serve the project root:
 
-The repository has no test harness. After changing game behavior, manually check:
+```bash
+python -m http.server 8000
+```
 
-- Starting from the title screen and music behavior
-- Each arrow-key action
-- Collision and game-over behavior
-- Score updates on a successful pass
-- Repeated play/reload behavior
-- Narrow and wide viewport rendering
-- Asset loading with and without internet access
+Open `http://localhost:8000`.
 
-Report only the checks you actually performed.
+## Run quality checks
 
-## Known implementation issues
+```bash
+npm test
+npm run validate
+npm run check
+```
 
-- `script.js` assigns several variables without declarations, creating implicit globals in the current classic-script context.
-- The collision interval and keyboard listener are not cleaned up after game over.
-- The bull's animation duration is reduced after successful passes without a lower bound.
-- Player movement is not constrained to the viewport.
-- The `#overlay` markup is present but not used by the current script.
+- `npm test` runs the Node.js built-in test runner.
+- `npm run validate` checks required files, local Markdown links, and local runtime assets.
+- `npm run check` runs both checks.
 
-Address these as focused behavior changes and update the README and docs.
+No `npm install` is required because the project has no external npm dependencies.
 
-## Assets and rights
+## Code organization
 
-Do not add or redistribute artwork, character images, music, or fonts without permission. The existing MIT grant excludes bundled media of uncertain provenance. See [LICENSE](../LICENSE).
+- Keep browser DOM and audio behavior in `script.js`.
+- Keep deterministic calculations in `game-logic.js` so they can be tested without a browser.
+- Add focused unit tests under `tests/`.
+- Keep the browser application static unless a real requirement justifies a backend.
+- Preserve local relative paths for the artwork and audio.
+
+## Input and lifecycle rules
+
+- Use one animation loop per active game session.
+- Stop the loop on collision, pause, and return to title.
+- Reset score, position, difficulty, and audio when starting a new session.
+- Ignore gameplay input while paused or after game over.
+- Keep player movement within the game container.
+- Treat `prefers-reduced-motion` as a real user preference.
+- Keep all controls reachable by keyboard and touch.
+
+## Asset and license rules
+
+Do not add artwork, character illustrations, music, sound effects, or fonts unless redistribution rights are documented. The root MIT grant excludes the existing branded media. Use [asset-rights-record.md](templates/asset-rights-record.md) for proposed media contributions.
+
+## Pull requests
+
+Describe the behavior changed and browser/manual checks completed. Update gameplay, architecture, testing, troubleshooting, and README documentation when user-visible behavior changes.
