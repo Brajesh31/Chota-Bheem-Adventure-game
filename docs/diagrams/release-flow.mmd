@@ -1,0 +1,9 @@
+flowchart TD
+  A[Change source or documentation] --> B[Review diff]
+  B --> C[Manual browser smoke test]
+  C --> D{Expected behavior?}
+  D -->|No| E[Fix and repeat checks]
+  E --> B
+  D -->|Yes| F[Review rights, links, and release notes]
+  F --> G[Publish static files]
+  G --> H[Verify hosted asset paths]
