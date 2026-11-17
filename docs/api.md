@@ -1,15 +1,17 @@
-# API Reference
+# 🔌 API and Integrations
 
-This project has no HTTP API, network protocol, or application endpoint. Gameplay runs in the browser using local DOM elements, CSS animations, keyboard events, timers, and bundled media.
+## HTTP API
+There is no application API. The repository contains no backend routes, HTTP client, server-side handlers, or database connection.
 
-## Browser interactions
+## Third-party network request
+The HTML requests the Ubuntu font stylesheet from Google Fonts. This is an external browser request and may be blocked by network policy, privacy extensions, or offline use. CSS includes generic font fallbacks.
 
-| Input/event | Current effect |
-| --- | --- |
-| Click `#startButton` | Hide start screen, show game, and call `startGame()` |
-| `ArrowUp` keydown | Add the jump animation class briefly |
-| `ArrowLeft` keydown | Subtract 112 pixels from the character's computed left position |
-| `ArrowRight` keydown | Add 112 pixels to the character's computed left position |
-| Game interval | Check character/obstacle offsets and update score or game-over state |
+## Browser APIs used
+- DOM event listeners for page readiness, button click, and keyboard input.
+- `window.getComputedStyle` to read animated element positions.
+- `setInterval` and `setTimeout` for polling and timing.
+- `Audio` for background and game-over playback.
+- CSS animations for character jumping and obstacle movement.
 
-No data is sent to a server. There is no API key or request configuration.
+## Not implemented
+No authentication, user profiles, leaderboard API, analytics, payment integration, cloud save, or multiplayer service exists. Any future integration must document data sent, purpose, retention, consent, security controls, and failure behavior.
