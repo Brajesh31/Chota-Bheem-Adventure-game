@@ -1,32 +1,31 @@
-# Installation and Play
+# 🛠️ Installation and Local Setup
 
 ## Requirements
+- A current desktop browser with JavaScript enabled.
+- A local copy of this repository.
+- Optional: a static HTTP server for serving local files.
 
-- A modern desktop browser with JavaScript enabled
-- Keyboard input
+Node.js, npm, a database, a backend, and environment secrets are not required.
 
-No compiler, package manager, backend, database, API key, or environment variable is required.
+## Option A: Open the file
+Open `index.html` directly in a browser. The game uses relative asset paths. This is sufficient in browsers that permit local file resource loading.
 
-## Open the game
+## Option B: Run a static HTTP server
+From the repository root:
 
-1. Clone or download the repository.
-2. Keep the HTML, CSS, JavaScript, and media files in their existing relative paths.
-3. Open `index.html` in a browser.
-4. If local-file restrictions block an asset, serve the repository directory through any simple static file server and open its local URL.
-5. Select **Lets Run** to begin.
+```bash
+python -m http.server 8000
+```
 
-The page uses a Google Fonts stylesheet for Ubuntu. If offline, it falls back to a sans-serif font. Background music starts in response to the start-button click.
+Then visit `http://localhost:8000`. This is a development convenience, not an application server.
 
-## Controls
+## Verify the page
+1. Confirm the start screen background loads.
+2. Start the game.
+3. Confirm the character, jungle background, and bull render.
+4. Test Up, Left, and Right.
+5. Observe score progression and collision behavior.
+6. Check browser console and network panel for missing assets.
 
-| Key | Action |
-| --- | --- |
-| Up arrow | Jump |
-| Left arrow | Move left |
-| Right arrow | Move right |
-
-On collision, the game-over message appears. Reload the page to play again.
-
-## Configuration
-
-There are no configuration settings or environment variables. `.env.example` is explanatory only.
+## Environment file
+`.env.example` documents that no environment variables are currently required. Browser JavaScript is public to every visitor. Never put API keys, passwords, or private credentials in HTML, CSS, or client-side JavaScript.
