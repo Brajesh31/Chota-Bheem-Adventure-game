@@ -1,14 +1,15 @@
 # 📖 Glossary
 
-| Term | Meaning in this project |
+| Term | Meaning |
 |---|---|
-| Start screen | Initial page content shown before the game |
-| Game screen | Container displaying the character, obstacle, and score |
-| Player | The character element styled by `.bheem` |
-| Obstacle | The bull element styled by `.bull` |
-| Jump class | `.animateBheem`, which triggers the jump keyframes |
-| Obstacle animation | `.bullAni`, which moves the obstacle across the screen |
-| Crossing guard | Boolean variable used to avoid counting the same pass repeatedly |
-| Collision threshold | Current horizontal and vertical offset cutoffs in `script.js` |
-| Static hosting | Serving HTML, CSS, JavaScript, and assets without server-side application code |
-| Third-party asset | Media or branding not demonstrably created or licensed by this repository's maintainer |
+| Start screen | Initial page shown before a session |
+| Game screen | Container displaying character, obstacle, score, and controls |
+| Player | Character element styled by `.bheem` |
+| Obstacle | Moving bull element styled by `.bull` |
+| Hitbox | Inset rectangle used for collision detection |
+| Game loop | A single requestAnimationFrame callback chain while active |
+| Crossing guard | Session flag that prevents scoring twice for one obstacle pass |
+| Pause state | A session state that cancels the loop and pauses obstacle/audio |
+| Reduced motion | Browser/OS preference that switches to a static jungle background and slows motion |
+| Static hosting | Serving HTML, CSS, JavaScript, and media without application backend code |
+| Third-party asset | Media or branding whose creation or license is not established by this repository |
