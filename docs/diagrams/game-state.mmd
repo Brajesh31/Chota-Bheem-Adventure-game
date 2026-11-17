@@ -1,0 +1,7 @@
+stateDiagram-v2
+  [*] --> StartScreen
+  StartScreen --> Playing: Start button
+  Playing --> Playing: Safe obstacle crossing / score
+  Playing --> GameOver: Collision
+  GameOver --> [*]: Reload page
+  note right of GameOver: No in-page restart currently
