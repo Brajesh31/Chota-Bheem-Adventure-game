@@ -33,7 +33,10 @@
         <div id="gameContainer" class="game-container">
           <div class="game-topbar">
             <p id="scoreCount" class="score-count" aria-live="polite" aria-atomic="true">Score: 0</p>
-            <button id="pauseButton" class="secondary-button" type="button" disabled>Pause</button>
+            <div class="toolbar-actions">
+              <button id="pauseButton" class="secondary-button" type="button" disabled>Pause</button>
+              <button id="exitButton" class="secondary-button" type="button">Exit</button>
+            </div>
           </div>
           <p id="gameStatus" class="game-status" role="status" aria-live="polite">
             Avoid the bull. Use the arrow keys, Space, or the on-screen controls.
