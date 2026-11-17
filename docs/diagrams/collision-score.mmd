@@ -1,12 +1,13 @@
 flowchart TD
-  A[10 ms interval callback] --> B[Read computed player and bull positions]
-  B --> C[Calculate horizontal and vertical offsets]
-  C --> D{Collision thresholds met?}
-  D -->|Yes| E[Play game-over audio and update message]
-  E --> F[Remove bull animation class]
-  D -->|No| G{Obstacle crossing window and guard?}
-  G -->|Yes| H[Increment score and re-arm guard]
-  H --> I[Increase difficulty by reducing animation duration]
-  G -->|No| J[Wait for next interval]
+  A[requestAnimationFrame callback] --> B[Read player and obstacle rectangles]
+  B --> C[Inset hitboxes to reduce transparent padding]
+  C --> D{Hitboxes overlap?}
+  D -->|Yes| E[End session once]
+  E --> F[Cancel loop, pause obstacle, show final score]
+  D -->|No| G{Obstacle cleared player?}
+  G -->|Yes, not scored this pass| H[Increment score once]
+  H --> I[Reduce animation duration to bounded minimum]
+  G -->|No| J{Obstacle restarted at right edge?}
   I --> J
-  J --> A
+  J --> K[Schedule next animation frame]
+  K --> A
