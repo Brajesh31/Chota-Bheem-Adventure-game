@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Game session flow</title>
+  <desc id="desc">A flow diagram showing starting a game, reading input and positions, handling collision or scoring, pausing, and restarting.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#10271f"/><stop offset="1" stop-color="#28583b"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0 9 3 0 6z" fill="#f7c948"/></marker>
+    <style>
+      .node{fill:#fffdf4;stroke:#d7e6d8;stroke-width:2}
+      .action{fill:#dff0df;stroke:#2e7447}
+      .end{fill:#fff0c2;stroke:#c18b16}
+      .txt{font:700 22px Arial,sans-serif;fill:#173323;text-anchor:middle}
+      .sub{font:16px Arial,sans-serif;fill:#36513e;text-anchor:middle}
+      .edge{fill:none;stroke:#f7c948;stroke-width:4;marker-end:url(#arrow)}
+      .label{font:700 16px Arial,sans-serif;fill:#fff4ca}
+    </style>
+  </defs>
+  <rect width="1200" height="640" rx="24" fill="url(#bg)"/>
+  <text x="60" y="62" fill="#fffdf4" font-family="Arial,sans-serif" font-size="30" font-weight="700">GAME SESSION FLOW</text>
+  <text x="60" y="94" fill="#d5e8d8" font-family="Arial,sans-serif" font-size="17">Current browser-side lifecycle, including the updated pause and restart behavior</text>
+  <rect class="node action" x="55" y="240" width="185" height="112" rx="18"/>
+  <text class="txt" x="147" y="283">Start Game</text><text class="sub" x="147" y="315">Reset session state</text>
+  <rect class="node action" x="330" y="240" width="220" height="112" rx="18"/>
+  <text class="txt" x="440" y="283">Game Loop</text><text class="sub" x="440" y="315">Read hitboxes + input</text>
+  <path class="edge" d="M240 296H326"/>
+  <path class="edge" d="M550 296H610"/>
+  <path d="M705 218 800 296 705 374 610 296z" fill="#fff0c2" stroke="#c18b16" stroke-width="3"/>
+  <text class="txt" x="705" y="290">Collision?</text><text class="sub" x="705" y="318">Overlap hitboxes</text>
+  <path class="edge" d="M800 296H875"/>
+  <rect class="node action" x="880" y="240" width="245" height="112" rx="18"/>
+  <text class="txt" x="1002" y="283">Score +1</text><text class="sub" x="1002" y="315">Once per obstacle pass</text>
+  <path class="edge" d="M1002 352V445H440V356"/>
+  <text class="label" x="700" y="430">NO</text>
+  <path class="edge" d="M705 374V500H890"/>
+  <text class="label" x="725" y="468">YES</text>
+  <rect class="node end" x="890" y="452" width="235" height="105" rx="18"/>
+  <text class="txt" x="1007" y="493">Game Over</text><text class="sub" x="1007" y="523">Stop loop + show score</text>
+  <path class="edge" d="M890 505H805"/>
+  <rect class="node" x="575" y="452" width="225" height="105" rx="18"/>
+  <text class="txt" x="687" y="493">Play Again</text><text class="sub" x="687" y="523">Reset and restart</text>
+  <path class="edge" d="M575 505H440V356"/>
+  <text class="label" x="500" y="486">RESTART</text>
+  <text x="60" y="600" fill="#d5e8d8" font-family="Arial,sans-serif" font-size="15">Pause suspends the loop and obstacle animation. Returning to Start stops the session and audio.</text>
+</svg>
