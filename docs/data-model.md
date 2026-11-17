@@ -2,33 +2,35 @@
 
 ## No persistent data store
 
-The game has no database, local-storage persistence, cookies managed by the application, user account, or server session. State is held in JavaScript variables and DOM/CSS state for the current page lifetime.
+The game has no database, local-storage persistence, application-managed cookies, user account, or server session. All gameplay state exists in memory for the current page session.
 
 ## Current session state
 
-| State | Current representation | Lifetime |
+| State | Representation | Lifecycle |
 |---|---|---|
-| Score | Local variable inside `startGame`, reflected in `#scoreCount` | Current page session |
-| Crossing guard | Local boolean `cross` | Current game function scope |
-| Player horizontal position | Inline CSS `left` value | Current page session |
-| Jump state | CSS class `animateBheem` | Animation timeout |
-| Obstacle state | CSS class and computed animation position | Current page session |
-| Audio playback | Browser `Audio` objects | Current game session, without explicit teardown |
+| Score | `state.score`, reflected in `#scoreCount` | Reset on each start |
+| Session active | `state.running` | True during active play |
+| Pause status | `state.paused` | Set by Pause/Resume and page visibility |
+| Score guard | `state.scoredThisPass` | Prevents duplicate score for one obstacle pass |
+| Animation handle | `state.animationFrame` | Cancelled on pause/end/return |
+| Jump timer | `state.jumpTimeout` | Cleared when jump or session resets |
+| Player position | Inline CSS `left` value | Clamped to the game container |
+| Obstacle position | CSS keyframe animation | Paused/resumed with session |
 
-## State flow
+## Session state flow
 
 ```mermaid
-flowchart TD
-  A[Load page] --> B[Start screen]
-  B -->|Click start| C[Show game]
-  C --> D[Initialize score and audio]
-  D --> E[Keyboard and collision loop]
-  E -->|Obstacle safely passes| F[Increment score]
-  F --> E
-  E -->|Collision| G[Show game over]
-  G --> H[Reload page to start again]
+stateDiagram-v2
+  [*] --> Ready
+  Ready --> Playing: Start
+  Playing --> Paused: Pause / tab hidden
+  Paused --> Playing: Resume
+  Playing --> GameOver: Collision
+  GameOver --> Playing: Play Again
+  GameOver --> Ready: Back to Start
+  Playing --> Ready: Back to Start
 ```
 
-## Future persistence
+## Persistence boundary
 
-A high-score feature could use browser storage, but this would introduce stored data and should be documented with clear user expectations and a reset path. Cloud leaderboard functionality would require a backend and a separate security/privacy design.
+Closing or reloading the page resets the score and game state. There is no high-score storage, analytics, or server synchronization. Adding persistence would require a separately documented data lifecycle, reset control, and privacy review.
