@@ -276,6 +276,10 @@ kbd {
   background: url("bull.gif") center / contain no-repeat;
 }
 
+.bheem {
+  --jump-height: 250px;
+}
+
 .animateBheem {
   animation: bheem-jump 620ms cubic-bezier(0.2, 0.72, 0.35, 1);
 }
@@ -355,7 +359,7 @@ kbd {
 
 @keyframes bheem-jump {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-250px); }
+  50% { transform: translateY(calc(var(--jump-height) * -1)); }
 }
 
 @keyframes bull-run {
@@ -426,7 +430,11 @@ kbd {
   }
 
   .bullAni {
-    animation-duration: 9s;
+    animation-duration: 9s !important;
+  }
+
+  .bheem {
+    --jump-height: 120px;
   }
 
   .animateBheem {
