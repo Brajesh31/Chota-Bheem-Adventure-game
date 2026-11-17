@@ -1,7 +1,11 @@
 stateDiagram-v2
-  [*] --> StartScreen
-  StartScreen --> Playing: Start button
-  Playing --> Playing: Safe obstacle crossing / score
+  [*] --> Ready
+  Ready --> Playing: Start
+  Playing --> Paused: Pause or tab hidden
+  Paused --> Playing: Resume
   Playing --> GameOver: Collision
-  GameOver --> [*]: Reload page
-  note right of GameOver: No in-page restart currently
+  GameOver --> Playing: Play Again / reset state
+  GameOver --> Ready: Back to Start
+  Playing --> Ready: Back to Start
+  note right of Paused: Animation loop and obstacle/audio are paused
+  note right of GameOver: Loop is cancelled and final score is announced
