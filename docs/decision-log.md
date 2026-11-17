@@ -1,35 +1,43 @@
 # 🧠 Decision Log
 
-This log captures current architectural choices and constraints visible in the repository. It is not a record of formal stakeholder approvals.
+This log records current engineering choices visible in the project. It is not a record of formal stakeholder approvals.
 
 ## DEC-001: Static browser implementation
 
 **Status:** Current
 
-The game is implemented with HTML, CSS, and classic JavaScript. No framework, server, build tool, database, or package manager is required. This keeps local setup simple.
+The game is built with HTML, CSS, and native JavaScript modules. No backend, build system, or runtime dependency is required. Node.js is used only for tests and repository checks.
 
-**Trade-off:** State, lifecycle, testing, and input behavior are directly managed in the browser and currently lack formal abstractions.
+**Trade-off:** The game has no remote score persistence or shared player accounts.
 
-## DEC-002: CSS-driven character and obstacle animation
-
-**Status:** Current
-
-The player jump and bull movement use CSS keyframe animations. JavaScript reads computed style positions for collision detection.
-
-**Trade-off:** Collision behavior is coupled to CSS pixels and animation timing.
-
-## DEC-003: Separate media files
+## DEC-002: CSS-driven artwork movement
 
 **Status:** Current
 
-Images, GIFs, and MP3 files are stored in the repository and referenced through relative paths.
+CSS keyframes animate the player jump and obstacle movement. JavaScript reads rendered rectangles to determine collision and completed passes.
 
-**Trade-off:** Asset rights, file size, and browser decoding need independent review. The MIT grant excludes uncertain third-party media.
+**Trade-off:** Gameplay feel depends on CSS geometry and browser rendering. Hitboxes use an inset rectangle approximation.
 
-## DEC-004: Manual browser verification
+## DEC-003: One animation-frame loop per session
 
 **Status:** Current
 
-There is no test framework. Manual checks are documented in [testing.md](testing.md).
+The controller starts one requestAnimationFrame loop and cancels it on pause, collision, or return to title. A new loop begins on resume.
 
-**Trade-off:** Regression confidence depends on the tester and browser coverage.
+**Trade-off:** Collision checks remain coupled to the current DOM layout and CSS animation.
+
+## DEC-004: Pure game logic separated for unit testing
+
+**Status:** Current
+
+Geometry, position clamping, obstacle pass detection, hitbox inset, and difficulty duration live in `game-logic.js` and are tested with Node's built-in test runner.
+
+**Trade-off:** Browser integration, real audio, and visual behavior still need manual tests.
+
+## DEC-005: Local assets and no remote font request
+
+**Status:** Current
+
+The game uses local media and system fonts. The external Google Fonts stylesheet was removed to reduce runtime network dependence.
+
+**Trade-off:** The appearance may vary slightly across platforms due to system font differences.
