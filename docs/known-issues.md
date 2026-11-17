@@ -1,28 +1,26 @@
-# 🐛 Known Issues and Technical Debt
+# 🐛 Known Issues and Remaining Limitations
 
-This document reflects the current committed source, not hypothetical future design.
+This page lists gaps that remain after the game lifecycle improvements. It does not claim a full product or browser QA audit.
 
-| Area | Observation | Impact |
+| Area | Current limitation | Practical impact |
 |---|---|---|
-| Variable scope | Several identifiers in `script.js` are assigned without declarations | Implicit globals and fragile maintenance |
-| Session lifecycle | Collision interval is not cleared on game over | Repeated collision handling may continue |
-| Event listeners | Keyboard handler is added inside `startGame` with no teardown | Repeated start could accumulate listeners if lifecycle changes |
-| Collision behavior | Position thresholds use computed pixel values | May be inconsistent across viewport sizes |
-| Player movement | Left/right movement has no boundary clamp | Character can leave visible play area |
-| Difficulty | Animation duration is reduced without a lower bound | Obstacle speed may become impractical |
-| Audio | `audio.play()` promises are not handled | Browser rejection may create console warnings |
-| Restart | No in-page restart control | User must reload |
-| Accessibility | No touch controls, live score announcement, or reduced-motion treatment | Excludes some input/assistive use |
-| Overlay | Overlay HTML exists but current script never activates it | Unused interface markup |
-| Documentation | Several bundled media files are unused by current source | Easy to misstate actual game content |
+| Character artwork | Existing character art and media rights are not established in repository metadata | Do not assume the files can be redistributed under MIT |
+| Collision model | Inset axis-aligned rectangles approximate visible artwork | Edge collisions may still feel imperfect |
+| Animation timing | Obstacle travel is CSS animation driven | Frame scheduling and browser rendering can affect perceived timing |
+| Game balance | Jump height and obstacle speed are fixed formulas | Difficulty may need tuning after real playtesting |
+| Audio | Browser playback can be blocked by site/tab policies | Gameplay continues without sound |
+| Touch | On-screen buttons trigger discrete movement, not continuous press-and-hold movement | Fine-grained movement is limited |
+| Accessibility | Live status and focus handling exist, but no formal screen-reader or WCAG audit has been completed | Accessibility claims must remain limited |
+| Persistence | Score is session-only | No saved high score or leaderboard |
+| Test coverage | Unit tests cover pure geometry and difficulty helpers only | Browser integration, real audio, and visual layout require manual checks |
+| Browser coverage | CI does not automate Chromium, Firefox, or Safari gameplay | Compatibility should be verified on target browsers |
 
-## Prioritization suggestion
+## Recommended next steps
 
-1. Make game-over a one-time transition and clear the collision interval.
-2. Declare all variables locally and avoid implicit globals.
-3. Clamp player movement and make controls responsive.
-4. Handle audio playback rejection and reset audio state.
-5. Add restart, pause, and touch controls.
-6. Add accessible status announcements and reduced-motion behavior.
+1. Confirm rights or replace all third-party media with rights-cleared assets.
+2. Conduct a manual playtest on desktop and touch devices and tune hitboxes.
+3. Add browser automation after deciding which browser versions to support.
+4. Run a screen-reader and keyboard accessibility review.
+5. Consider session high scores only with a documented storage and reset design.
 
-No issue in this table has been fixed by the handbook-only update. Use [ROADMAP.md](../ROADMAP.md) to propose changes.
+The previous unbounded interval, repeat game-over processing, movement overflow, and missing restart flow have been addressed in the current implementation.
