@@ -1,161 +1,454 @@
-/* Reset default margin and padding for all elements */
+:root {
+  color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #10271f;
+  color: #17231d;
+  --forest: #163c2d;
+  --leaf: #2e7447;
+  --sun: #f7c948;
+  --paper: #fffdf4;
+  --shadow: 0 18px 54px rgb(8 24 17 / 28%);
+}
+
 * {
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
 }
 
-/* STARTING PAGE */
+[hidden] {
+  display: none !important;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: #10271f;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 15% 10%, rgb(76 135 79 / 24%), transparent 35%),
+    linear-gradient(145deg, #10271f, #1b4934);
 }
 
-/* Styling for the starting page */
-#startPage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-image:url(frontPage.png);
+button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.75rem 1.2rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
 }
 
-.startContent {
-    text-align: center;
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
 }
 
-.gameTitle {
-    font-size: 48px;
-    color: #333;
-    margin-bottom: 20px;
+button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
-.gameDescription {
-    font-size: 24px;
-    color: #666;
-    margin-bottom: 40px;
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
-#startButton {
-    font-size: 24px;
-    padding: 15px 30px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+button:focus-visible {
+  outline: 3px solid #f7c948;
+  outline-offset: 3px;
 }
 
-#startButton:hover {
-    background-color: #45a049;
+.app-shell {
+  min-height: 100vh;
+  padding: clamp(12px, 3vw, 36px);
 }
 
-/* BHEEM PUNCH */
-/* Overlay for the Bheem punch */
-#overlay {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
+.screen {
+  width: min(1180px, 100%);
+  margin: 0 auto;
 }
 
-#overlay img {
-    max-width: 100%;
-    max-height: 100%;
+.start-screen {
+  display: grid;
+  min-height: calc(100vh - clamp(24px, 6vw, 72px));
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 28px;
+  padding: clamp(18px, 5vw, 56px);
+  background:
+    linear-gradient(105deg, rgb(6 26 18 / 78%), rgb(7 29 19 / 35%)),
+    url("frontPage.png") center / cover no-repeat;
+  box-shadow: var(--shadow);
 }
 
-/* Styling for the game */
-body {
-    background-color: red;
-    overflow: hidden;
+.start-card {
+  width: min(680px, 100%);
+  margin-right: auto;
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 24px;
+  padding: clamp(24px, 5vw, 48px);
+  color: white;
+  background: rgb(9 34 23 / 78%);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
 }
 
-.gameContainer {
-    background-image: url(jungle.gif);
-    background-repeat: no-repeat;
-    background-size: 100vw 100vh;
-    width: 100%;
-    height: 100vh;
+.eyebrow {
+  margin: 0 0 0.7rem;
+  color: var(--sun);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.game-title {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.game-description {
+  max-width: 54ch;
+  margin: 1.25rem 0 1.5rem;
+  color: #e5f0e7;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.instruction-panel {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0 0 1.6rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  background: rgb(255 255 255 / 8%);
+}
+
+.instruction-panel h2 {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+}
+
+.instruction-panel p {
+  margin: 0;
+  color: #e5f0e7;
+  line-height: 1.5;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.8rem;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 6px;
+  padding: 0.12rem 0.4rem;
+  color: white;
+  background: rgb(255 255 255 / 12%);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+}
+
+.primary-button {
+  color: #18291d;
+  background: var(--sun);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 18%);
+}
+
+.primary-button:hover:not(:disabled) {
+  background: #ffdb70;
+}
+
+.secondary-button {
+  border: 1px solid rgb(255 255 255 / 35%);
+  color: white;
+  background: rgb(16 45 31 / 88%);
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: #28583b;
+}
+
+.small-note {
+  margin: 1rem 0 0;
+  color: #d8e7db;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.game-screen {
+  display: grid;
+  gap: 1rem;
+}
+
+.game-container {
+  position: relative;
+  min-height: 420px;
+  height: min(72vh, 720px);
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 24px;
+  background: #568b4a url("jungle.gif") center / 100% 100% no-repeat;
+  box-shadow: var(--shadow);
+}
+
+.game-container::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 22%), transparent 28%, rgb(0 0 0 / 6%));
+  content: "";
+  pointer-events: none;
+}
+
+.game-topbar {
+  position: absolute;
+  z-index: 4;
+  top: 18px;
+  right: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.score-count {
+  margin: 0;
+  border: 1px solid rgb(255 255 255 / 50%);
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  color: #14271a;
+  background: rgb(255 253 244 / 92%);
+  font-size: 1.15rem;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 15%);
+}
+
+.game-status {
+  position: absolute;
+  z-index: 3;
+  top: 86px;
+  left: 50%;
+  width: min(90%, 620px);
+  margin: 0;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  color: white;
+  background: rgb(12 42 27 / 72%);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: center;
+  transform: translateX(-50%);
 }
 
 .bheem {
-    background-image: url(bheem.gif);
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 50%;
-    width: 140px;
-    height: 130px;
-    position: absolute;
-    bottom: 0;
-    left: 52px;
+  position: absolute;
+  z-index: 2;
+  bottom: 12px;
+  left: clamp(12px, 6vw, 64px);
+  width: clamp(88px, 12vw, 140px);
+  height: clamp(88px, 12vw, 130px);
+  border-radius: 24px;
+  background: url("bheem.gif") center / contain no-repeat;
+  will-change: transform;
 }
 
 .bull {
-    width: 160px;
-    height: 150px;
-    border-radius: 50%;
-    background-image: url(bull.gif);
-    background-size: cover;
-    position: absolute;
-    bottom: 0;
-    left: 44vw;
+  position: absolute;
+  z-index: 2;
+  bottom: 10px;
+  left: 100%;
+  width: clamp(100px, 14vw, 160px);
+  height: clamp(100px, 14vw, 150px);
+  border-radius: 24px;
+  background: url("bull.gif") center / contain no-repeat;
 }
 
 .animateBheem {
-    animation: bheem 0.6s linear;
+  animation: bheem-jump 620ms cubic-bezier(0.2, 0.72, 0.35, 1);
 }
 
 .bullAni {
-    animation: bullAni 5s linear infinite;
+  animation: bull-run 5s linear infinite;
 }
 
-.gameOver {
-    position: relative;
-    top: 63px;
-    font-size: 53px;
-    text-align: center;
-    font-family: 'Ubuntu', sans-serif;
+.game-over-panel {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.85rem;
+  padding: 24px;
+  color: white;
+  background: rgb(7 24 17 / 82%);
+  text-align: center;
+  backdrop-filter: blur(5px);
 }
 
-#scoreCount {
-    font-size: 25px;
-    color: #54212f;
-    font-weight: bold;
-    position: absolute;
-    right: 45px;
-    top: 31px;
-    border: 2px solid black;
+.game-over-panel h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 8vw, 4.3rem);
+}
+
+.game-over-panel p:not(.eyebrow) {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.7rem;
+}
+
+.mobile-controls {
+  display: flex;
+  justify-content: center;
+  gap: clamp(10px, 4vw, 22px);
+}
+
+.mobile-controls button {
+  display: flex;
+  min-width: 78px;
+  min-height: 58px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid rgb(255 255 255 / 20%);
+  color: white;
+  background: #214f36;
+  font-size: 1.45rem;
+}
+
+.mobile-controls span {
+  font-size: 0.85rem;
+}
+
+.audio-status,
+.game-help {
+  min-height: 1.2rem;
+  margin: 0;
+  color: #e5f0e7;
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.audio-status:not(:empty) {
+  color: #ffdf8b;
+}
+
+@keyframes bheem-jump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-250px); }
+}
+
+@keyframes bull-run {
+  from { left: 100%; }
+  to { left: -180px; }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
     padding: 10px;
-    font-family: 'Ubuntu', sans-serif;
-    border-radius: 10px;
+  }
+
+  .start-screen {
+    min-height: calc(100vh - 20px);
+    border-radius: 18px;
+    padding: 14px;
+    background-position: 58% center;
+  }
+
+  .start-card {
+    border-radius: 18px;
+    padding: 22px;
+  }
+
+  .game-container {
+    height: 64vh;
+    min-height: 350px;
+    border-radius: 18px;
+  }
+
+  .game-status {
+    top: 82px;
+    border-radius: 12px;
+    font-size: 0.83rem;
+  }
+
+  .game-topbar {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+  }
+
+  .score-count {
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+  }
+
+  .game-over-panel {
+    padding: 18px;
+  }
+
+  .panel-actions {
+    width: 100%;
+  }
+
+  .panel-actions button {
+    flex: 1 1 145px;
+  }
 }
 
-/* Animation keyframes */
-@keyframes bheem {
-    0% {
-        bottom: 0;
-    }
-    50% {
-        bottom: 422px;
-    }
-    100% {
-        bottom: 0; 
-    }
+@media (prefers-reduced-motion: reduce) {
+  .start-screen {
+    background-position: center;
+  }
+
+  .game-container {
+    background-image: url("jungle.png");
+  }
+
+  .bullAni {
+    animation-duration: 9s;
+  }
+
+  .animateBheem {
+    animation-duration: 400ms;
+  }
+
+  button {
+    transition: none;
+  }
 }
 
-@keyframes bullAni {
-    0% {
-        left: 100vw;
-    }
-    100% {
-        left: -10vw;
-    }
+@media (max-height: 520px) and (min-width: 641px) {
+  .game-container {
+    height: 82vh;
+    min-height: 300px;
+  }
+
+  .start-screen {
+    min-height: 92vh;
+  }
+
+  .start-card {
+    padding: 22px 28px;
+  }
 }
