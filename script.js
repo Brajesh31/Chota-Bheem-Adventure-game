@@ -170,6 +170,8 @@ document.addEventListener("DOMContentLoaded", () => {
     state.running = true;
     state.paused = false;
     state.score = 0;
+    gameOverAudio.pause();
+    gameOverAudio.currentTime = 0;
     state.scoredThisPass = false;
 
     window.clearTimeout(state.jumpTimeout);
@@ -191,6 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gamePage.hidden = false;
     startPage.hidden = true;
+    pauseButton.focus();
     void playAudio(backgroundAudio);
     stopGameLoop();
     state.animationFrame = window.requestAnimationFrame(gameLoop);
