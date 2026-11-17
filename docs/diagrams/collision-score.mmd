@@ -1,0 +1,12 @@
+flowchart TD
+  A[10 ms interval callback] --> B[Read computed player and bull positions]
+  B --> C[Calculate horizontal and vertical offsets]
+  C --> D{Collision thresholds met?}
+  D -->|Yes| E[Play game-over audio and update message]
+  E --> F[Remove bull animation class]
+  D -->|No| G{Obstacle crossing window and guard?}
+  G -->|Yes| H[Increment score and re-arm guard]
+  H --> I[Increase difficulty by reducing animation duration]
+  G -->|No| J[Wait for next interval]
+  I --> J
+  J --> A
